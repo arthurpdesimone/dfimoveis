@@ -3,6 +3,7 @@
 @author: Arthur Pendragon De Simone
 '''
 import json
+import sys
 import time
 import traceback
 from datetime import datetime
@@ -46,6 +47,7 @@ def download_imoveis(api,pagina):
 
         soup = BeautifulSoup(requisicao.text, "html.parser")
         imoveis = soup.find_all('a', class_='new-card')
+        print(len(imoveis))
         # Loop pelos imóveis
         for imovel in imoveis:
             try:
@@ -146,7 +148,8 @@ def download_imoveis(api,pagina):
                 lista_imoveis.append(imovel_dict)
                 yield "data:"+str(json.dumps(lista_imoveis))+"\n\n"
             except Exception as e:
-                traceback.print_exc()
+                #traceback.print_exc()
+                print(e, file=sys.stderr)
         yield "data:close\n\n"
     response = Response(stream_with_context(gerar_resposta(api, pagina)), mimetype='text/event-stream')
     response.headers['X-Accel-Buffering'] = 'no'
