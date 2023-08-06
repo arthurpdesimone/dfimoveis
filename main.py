@@ -39,7 +39,7 @@ def download_imoveis(api,pagina):
             try:
                 # Scrapping
                 link = imovel['href']
-                link_base = 'https://www.dfimoveis.com.br'
+                link_base = 'http://www.dfimoveis.com.br'
                 link_request = link_base + link
                 imovel_request = requests.get(link_request)
                 imovel_soup = BeautifulSoup(imovel_request.text, "html.parser")
