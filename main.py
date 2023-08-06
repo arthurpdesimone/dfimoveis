@@ -17,6 +17,18 @@ app = Flask(__name__, static_folder='templates/assets')
 def index():
     return render_template('index.html')
 
+@app.route('/test/<api>')
+def test(api):
+    gmaps = googlemaps.Client(key=api)
+    now = datetime.now()
+    carro_direcoes = gmaps.directions('Rua Dias de Oliveira, 192',
+                                      'Rua Vespasiano, 76',
+                                      mode="driving",
+                                      avoid="ferries",
+                                      departure_time=now
+                                      )
+    return json.dumps(carro_direcoes)
+
 @app.route('/<api>/<pagina>',methods=['GET'])
 def download_imoveis(api,pagina):
     def event_stream():
