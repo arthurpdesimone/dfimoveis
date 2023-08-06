@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i&amp;display=swap">
     <link rel="stylesheet" href="assets/fonts/fontawesome-all.min.css">
+    <link rel="stylesheet" href="assets/css/main.css">
 </head>
 
 <body id="page-top">
@@ -17,7 +18,7 @@
                 <nav class="navbar navbar-expand bg-white shadow mb-4 topbar static-top navbar-light">
                     <div class="container-fluid">
                         <form class="d-none d-sm-inline-block me-auto ms-md-3 my-2 my-md-0 mw-100 navbar-search">
-                            <div class="input-group"><input class="bg-light form-control border-0 small" type="text" id="api" placeholder="Insira sua chave de API"><button class="btn btn-primary py-0" id="search" type="button" onclick="search()"><i class="fas fa-search"></i><span class="spinner-border spinner-border-sm" role="status"></span></button></div>
+                            <div class="input-group"><input class="bg-light form-control border-0 small" type="text" id="api" placeholder="Insira sua chave de API"><button class="btn btn-primary py-0" id="search" type="button" onclick="search()"><i class="fas fa-search" id="search-icon"></i><span class="spinner-border spinner-border-sm" role="status" id="spinner"></span></button></div>
                         </form>
                         <ul class="navbar-nav flex-nowrap ms-auto">
                             <li class="nav-item dropdown d-sm-none no-arrow"><a class="dropdown-toggle nav-link" aria-expanded="false" data-bs-toggle="dropdown" href="#"><i class="fas fa-search"></i></a>
@@ -43,12 +44,12 @@
                         </div>
                         <div class="card-body">
                             <div class="table-responsive table mt-2" id="dataTable" role="grid" aria-describedby="dataTable_info">
-                                <table class="table my-0" id="dataTable">
-                                    <thead>
+                                <table class="table my-0 sticky-top" id="dataTable">
+                                    <thead class="thead">
                                         <tr>
                                             <th>Índice</th>
                                             <th>Endereço</th>
-                                            <th>Preço (m²)</th>
+                                            <th>Preço (R$)</th>
                                             <th>Área (m²)</th>
                                             <th>Carro (min)</th>
                                             <th>Transporte Público (min)</th>
@@ -56,22 +57,13 @@
                                             <th>E-mail</th>
                                         </tr>
                                     </thead>
-                                    <tbody>
-                                        <tr>
-                                            <td><img class="rounded-circle me-2" width="30" height="30" src="assets/img/avatars/avatar1.jpeg">Airi Satou</td>
-                                            <td>Accountant</td>
-                                            <td>Tokyo</td>
-                                            <td>33</td>
-                                            <td>2008/11/28</td>
-                                            <td>$162,700</td>
-                                        </tr>
-                                    </tbody>
+                                    <tbody></tbody>
                                     <tfoot>
                                         <tr>
                                             <td><strong>Índice</strong></td>
                                             <td><strong>Endereço</strong></td>
-                                            <td><strong>Preço(m²)</strong></td>
-                                            <td><strong>Área</strong></td>
+                                            <td><strong>Preço (R$)</strong></td>
+                                            <td><strong>Área (m²)</strong></td>
                                             <td><strong>Carro (min)</strong></td>
                                             <td><strong>Transporte Público (min)</strong></td>
                                             <td><strong>Link</strong></td>
@@ -86,9 +78,8 @@
             </div>
             <footer class="bg-white sticky-footer">
                 <div class="container my-auto">
-                    <div class="text-center my-auto copyright"><span>Copyright © Brand 2023</span></div>
+                    <div class="text-center my-auto copyright"><span>Copyright © Arthur Pendragon De Simone 2023</span></div>
                 </div>
-                <p id="response">Paragraph</p>
             </footer>
         </div><a class="border rounded d-inline scroll-to-top" href="#page-top"><i class="fas fa-angle-up"></i></a>
     </div>

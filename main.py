@@ -4,8 +4,6 @@
 '''
 import json
 import sys
-import time
-import traceback
 from datetime import datetime
 import googlemaps as googlemaps
 import requests
@@ -18,42 +16,24 @@ app = Flask(__name__, static_folder='templates/assets')
 def index():
     return render_template('index.html')
 
-@app.route('/test/<api>')
-def test(api):
-    gmaps = googlemaps.Client(key=api)
-    now = datetime.now()
-    carro_direcoes = gmaps.directions('Rua Dias de Oliveira, 192',
-                                      'Rua Vespasiano, 76',
-                                      mode="driving",
-                                      avoid="ferries",
-                                      departure_time=now
-                                      )
-    return json.dumps(carro_direcoes)
-
 @app.route('/<api>/<pagina>',methods=['GET'])
 def download_imoveis(api,pagina):
-    def event_stream():
-        while True:
-            yield "data:" + "test" + "\n\n"
-            time.sleep(1)
     def gerar_resposta(api,pagina):
-        lista_imoveis = []
         endereco_a_comparar = 'Banco do Brasil Sede III - Brasilia'
         gmaps = googlemaps.Client(key=api)
         # Fonte DF Imóveis
 
-        link = f'http://www.dfimoveis.com.br/aluguel/df/todos/imoveis/1,2-quartos?vagasdegaragem=1&ordenamento=menor-valor&pagina={pagina}'
+        link = f'https://www.dfimoveis.com.br/aluguel/df/todos/imoveis/1,2-quartos?vagasdegaragem=1&ordenamento=menor-valor&pagina={pagina}'
         requisicao = requests.get(link)
 
         soup = BeautifulSoup(requisicao.text, "html.parser")
         imoveis = soup.find_all('a', class_='new-card')
-        print(len(imoveis),file=sys.stderr)
         # Loop pelos imóveis
         for imovel in imoveis:
             try:
                 # Scrapping
                 link = imovel['href']
-                link_base = 'http://www.dfimoveis.com.br'
+                link_base = 'https://www.dfimoveis.com.br'
                 link_request = link_base + link
                 imovel_request = requests.get(link_request)
                 imovel_soup = BeautifulSoup(imovel_request.text, "html.parser")
@@ -62,7 +42,7 @@ def download_imoveis(api,pagina):
                 endereco = imovel_soup.find('h1', class_='mb-0 font-weight-600 fs-1-5')
                 preco = imovel_soup.find('small', class_='display-5 text-warning precoAntigoSalao')
                 area = imovel_soup.find('small', class_='display-5 text-warning')
-                area = float(area.text.replace(' ', '').replace('m²', '').replace(',', '.'))
+                area = round(float(area.text.replace(' ', '').replace('m²', '').replace(',', '.')))
                 cidade = imovel_soup.find_all('h6', class_='mb-0 text-normal text-nowrap')[1].find('small',
                                                                                                    class_='text-muted').text
                 email_anunciante = ''
@@ -130,7 +110,7 @@ def download_imoveis(api,pagina):
                     duracao_transp_pub = int(array_transp_pub[0])
 
                 # Calcula o índice
-                indice = preco * ((duracao_transp_pub + duracao_carro) ** 2) / area
+                indice = round(preco * ((duracao_transp_pub + duracao_carro) ** 2) / area)
 
                 # Imprime o resultado
                 print(
@@ -145,8 +125,7 @@ def download_imoveis(api,pagina):
                                'duracao_transp_pub': duracao_transp_pub,
                                'link': link_request,
                                'email': email_anunciante}
-                lista_imoveis.append(imovel_dict)
-                yield "data:"+str(json.dumps(lista_imoveis))+"\n\n"
+                yield "data:"+str(json.dumps(imovel_dict))+"\n\n"
             except Exception as e:
                 #traceback.print_exc()
                 print(e, file=sys.stderr)
