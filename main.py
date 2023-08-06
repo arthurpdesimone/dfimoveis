@@ -148,7 +148,9 @@ def download_imoveis(api,pagina):
             except Exception as e:
                 traceback.print_exc()
         yield "data:close\n\n"
-    return Response(stream_with_context(gerar_resposta(api,pagina)),mimetype='text/event-stream')
+    response = Response(stream_with_context(gerar_resposta(api, pagina)), mimetype='text/event-stream')
+    response.headers['X-Accel-Buffering'] = 'no'
+    return response
 if __name__ == "__main__":
     app.secret_key = 'secret key'
     app.run()
