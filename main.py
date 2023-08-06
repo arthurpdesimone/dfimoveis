@@ -47,7 +47,7 @@ def download_imoveis(api,pagina):
 
         soup = BeautifulSoup(requisicao.text, "html.parser")
         imoveis = soup.find_all('a', class_='new-card')
-        print(len(imoveis))
+        print(len(imoveis),file=sys.stderr)
         # Loop pelos imóveis
         for imovel in imoveis:
             try:
