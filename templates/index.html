@@ -1,23 +1,23 @@
 <!DOCTYPE html>
-<html lang="en">
+<html data-bs-theme="light" lang="en">
 
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
     <title>Table - Brand</title>
-    <link rel="stylesheet" href="/assets/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i&amp;display=swap">
-    <link rel="stylesheet" href="/assets/fonts/fontawesome-all.min.css">
+    <link rel="stylesheet" href="assets/fonts/fontawesome-all.min.css">
 </head>
 
 <body id="page-top">
     <div id="wrapper">
         <div class="d-flex flex-column" id="content-wrapper">
             <div id="content">
-                <nav class="navbar navbar-light navbar-expand bg-white shadow mb-4 topbar static-top">
+                <nav class="navbar navbar-expand bg-white shadow mb-4 topbar static-top navbar-light">
                     <div class="container-fluid">
                         <form class="d-none d-sm-inline-block me-auto ms-md-3 my-2 my-md-0 mw-100 navbar-search">
-                            <div class="input-group"><input class="bg-light form-control border-0 small" type="text" placeholder="Insira sua chave de API"><button class="btn btn-primary py-0" type="button"><i class="fas fa-search"></i><span class="spinner-border spinner-border-sm" role="status"></span></button></div>
+                            <div class="input-group"><input class="bg-light form-control border-0 small" type="text" id="api" placeholder="Insira sua chave de API"><button class="btn btn-primary py-0" id="search" type="button" onclick="search()"><i class="fas fa-search"></i><span class="spinner-border spinner-border-sm" role="status"></span></button></div>
                         </form>
                         <ul class="navbar-nav flex-nowrap ms-auto">
                             <li class="nav-item dropdown d-sm-none no-arrow"><a class="dropdown-toggle nav-link" aria-expanded="false" data-bs-toggle="dropdown" href="#"><i class="fas fa-search"></i></a>
@@ -58,7 +58,7 @@
                                     </thead>
                                     <tbody>
                                         <tr>
-                                            <td><img class="rounded-circle me-2" width="30" height="30" src="/assets/img/avatars/avatar1.jpeg">Airi Satou</td>
+                                            <td><img class="rounded-circle me-2" width="30" height="30" src="assets/img/avatars/avatar1.jpeg">Airi Satou</td>
                                             <td>Accountant</td>
                                             <td>Tokyo</td>
                                             <td>33</td>
@@ -88,12 +88,13 @@
                 <div class="container my-auto">
                     <div class="text-center my-auto copyright"><span>Copyright © Brand 2023</span></div>
                 </div>
+                <p id="response">Paragraph</p>
             </footer>
         </div><a class="border rounded d-inline scroll-to-top" href="#page-top"><i class="fas fa-angle-up"></i></a>
     </div>
-    <script src="/assets/bootstrap/js/bootstrap.min.js"></script>
-    <script src="/assets/js/main.js"></script>
-    <script src="/assets/js/theme.js"></script>
+    <script src="assets/bootstrap/js/bootstrap.min.js"></script>
+    <script src="assets/js/main.js"></script>
+    <script src="assets/js/theme.js"></script>
 </body>
 
 </html>
