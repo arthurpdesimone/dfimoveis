@@ -29,7 +29,7 @@ def download_imoveis(api,pagina):
         gmaps = googlemaps.Client(key=api)
         # Fonte DF Imóveis
 
-        link = f'https://www.dfimoveis.com.br/aluguel/df/todos/imoveis/1,2-quartos?vagasdegaragem=1&ordenamento=menor-valor&pagina={pagina}'
+        link = f'http://www.dfimoveis.com.br/aluguel/df/todos/imoveis/1,2-quartos?vagasdegaragem=1&ordenamento=menor-valor&pagina={pagina}'
         requisicao = requests.get(link)
 
         soup = BeautifulSoup(requisicao.text, "html.parser")
