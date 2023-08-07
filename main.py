@@ -20,12 +20,10 @@ def index():
 def download_imoveis(api,pagina):
     def gerar_resposta(api,pagina):
         ordem = 1
-        print(pagina)
         for p in range(1,int(pagina)+1):
             endereco_a_comparar = 'Banco do Brasil Sede III - Brasilia'
             gmaps = googlemaps.Client(key=api)
             # Fonte DF Imóveis
-            print(p)
             link = f'https://www.dfimoveis.com.br/aluguel/df/todos/imoveis/1,2-quartos?vagasdegaragem=1&ordenamento=menor-valor&pagina={p}'
             requisicao = requests.get(link)
 

@@ -5,8 +5,15 @@ document.getElementById("search").onclick = function() {
     search();
     document.getElementById("search-icon").style.display="none";
     document.getElementById("spinner").style.display="block";
-    document.getElementById("progress-bar").style.display="block";
 };
+
+//Modal instruções
+var locModal = document.getElementById('modal-instrucoes');
+var btnclose = document.getElementById('prosseguir');
+btnclose.addEventListener('click', (e) => {
+    locModal.style.display = "none";
+    locModal.className="modal fade";
+});
 
 
 function search() {
@@ -74,7 +81,7 @@ function search() {
             var transporte_celula = linha.insertCell(5);
             transporte_celula.innerHTML = transporte;
             var link_celula = linha.insertCell(6);
-            link_celula.innerHTML = link;
+            link_celula.innerHTML = "<a href='"+link+"'>Link</a>";
             var email_celula = linha.insertCell(7);
             email_celula.innerHTML = email;
             //Preenche progress bar
@@ -122,7 +129,12 @@ function makeAllSortable(parent) {
 window.onload = function () {
     makeAllSortable();
     document.getElementById("spinner").style.display="none";
+
+    //Reinicia a progress bar
     var bar = document.querySelector(".progress-bar");
     bar.style.width = 0 + "%";
     bar.innerText = 0 + "%";
+
+    document.querySelector(".modal").classList.add("show");
+    document.querySelector(".modal").style.display = "block";
 };
