@@ -1,14 +1,34 @@
+var baixando = false;
+var source;
 
 document.getElementById("search").onclick = function() {
     search();
     document.getElementById("search-icon").style.display="none";
     document.getElementById("spinner").style.display="block";
+    document.getElementById("progress-bar").style.display="block";
 };
 
 
 function search() {
+ 
     var apiKey = document.getElementById("api").value;
-    var source = new EventSource('/'+apiKey+'/1');
+    var pagina = document.getElementById("pagina-final").value;
+    console.log(baixando);
+    if(baixando===true){
+        source.close();
+        source = new EventSource('/'+apiKey+'/'+pagina);
+    }else{
+        source = new EventSource('/'+apiKey+'/'+pagina);
+    }
+    var registros = pagina*30;
+
+    //Limpa a tabela
+    document.querySelectorAll("table tbody tr").forEach(function(e){e.remove()})
+    //Reinicializa progress bar
+    var bar = document.querySelector(".progress-bar");
+    bar.style.width = 0 + "%";
+    bar.innerText = 0 + "%";
+
     source.onmessage = function(e) {
         console.log(e.data);
         if (e.data === "close"){
@@ -16,8 +36,12 @@ function search() {
             document.getElementById("search-icon").style.display="block";
             document.getElementById("spinner").style.display="none";
             source.close();
+            baixando = false;
         } else{
+            baixando = true;
             const dados = JSON.parse(e.data);
+            //Pegando ordem
+            var ordem = dados.ordem;
             //Pegando índice
             var indice = dados.indice;
             //Pegando endereço
@@ -53,6 +77,13 @@ function search() {
             link_celula.innerHTML = link;
             var email_celula = linha.insertCell(7);
             email_celula.innerHTML = email;
+            //Preenche progress bar
+            var pcg = Math.floor(ordem/registros*100);
+            console.log(pcg);
+            //document.getElementById("progress-bar-animated").setAttribute('aria-valuenow',pcg);
+            var bar = document.querySelector(".progress-bar");
+            bar.style.width = pcg + "%";
+            bar.innerText = pcg + "%";
         }
     }
 }
@@ -91,4 +122,7 @@ function makeAllSortable(parent) {
 window.onload = function () {
     makeAllSortable();
     document.getElementById("spinner").style.display="none";
+    var bar = document.querySelector(".progress-bar");
+    bar.style.width = 0 + "%";
+    bar.innerText = 0 + "%";
 };

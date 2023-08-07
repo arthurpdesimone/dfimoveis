@@ -8,7 +8,6 @@
     <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i&amp;display=swap">
     <link rel="stylesheet" href="assets/fonts/fontawesome-all.min.css">
-    <link rel="stylesheet" href="assets/css/main.css">
 </head>
 
 <body id="page-top">
@@ -17,8 +16,10 @@
             <div id="content">
                 <nav class="navbar navbar-expand bg-white shadow mb-4 topbar static-top navbar-light">
                     <div class="container-fluid">
-                        <form class="d-none d-sm-inline-block me-auto ms-md-3 my-2 my-md-0 mw-100 navbar-search">
-                            <div class="input-group"><input class="bg-light form-control border-0 small" type="text" id="api" placeholder="Insira sua chave de API"><button class="btn btn-primary py-0" id="search" type="button" onclick="search()"><i class="fas fa-search" id="search-icon"></i><span class="spinner-border spinner-border-sm" role="status" id="spinner"></span></button></div>
+                        <form class="d-none d-sm-inline-block me-auto ms-md-3 my-2 my-md-0 mw-100">
+                            <div>
+                                <div class="input-group"><input class="bg-light form-control border-0 small" type="text" id="api" placeholder="Insira sua chave de API"><button class="btn btn-primary py-0" id="search" type="button" onclick="search()"><i class="fas fa-search" id="search-icon"></i><span class="spinner-border spinner-border-sm" role="status" id="spinner"></span></button><input class="bg-light form-control border-0 small" type="text" id="pagina-final" placeholder="Página final de pesquisa"></div>
+                            </div>
                         </form>
                         <ul class="navbar-nav flex-nowrap ms-auto">
                             <li class="nav-item dropdown d-sm-none no-arrow"><a class="dropdown-toggle nav-link" aria-expanded="false" data-bs-toggle="dropdown" href="#"><i class="fas fa-search"></i></a>
@@ -34,11 +35,13 @@
                     </div>
                 </nav>
                 <div class="container-fluid">
-                    <h3 class="text-dark mb-4">Resultados</h3>
+                    <hgroup>
+                        <h3 class="text-dark mb-4">Resultados</h3>
+                    </hgroup>
                     <div class="card shadow">
                         <div class="card-header py-3">
                             <div class="progress">
-                                <div class="progress-bar" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100" style="width: 50%;">50%</div>
+                                <div class="progress-bar progress-bar-striped progress-bar-animated" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100" id="progress-bar-animated" style="width: 50%;">50%</div>
                             </div>
                             <p class="text-primary m-0 fw-bold">Imóveis para alugar em Brasília - DF</p>
                         </div>
@@ -57,7 +60,7 @@
                                             <th>E-mail</th>
                                         </tr>
                                     </thead>
-                                    <tbody></tbody>
+                                    <tbody id="table-body"></tbody>
                                     <tfoot>
                                         <tr>
                                             <td><strong>Índice</strong></td>
@@ -84,8 +87,9 @@
         </div><a class="border rounded d-inline scroll-to-top" href="#page-top"><i class="fas fa-angle-up"></i></a>
     </div>
     <script src="assets/bootstrap/js/bootstrap.min.js"></script>
-    <script src="assets/js/main.js"></script>
+    <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
     <script src="assets/js/theme.js"></script>
+    <script src="assets/js/main.js"></script>
 </body>
 
 </html>
