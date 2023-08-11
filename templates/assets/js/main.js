@@ -20,12 +20,16 @@ function search() {
  
     var apiKey = document.getElementById("api").value;
     var pagina = document.getElementById("pagina-final").value;
+    var endereco = document.getElementById("endereco").value;
+    var quartos = document.getElementById("quartos").value;
+    var vagas = document.getElementById("vagas").value;
+    console.log("Parâmetros de pesquisa: página:"+pagina+" endereço:"+endereco+" quartos:"+quartos+" vagas:"+vagas);
     console.log(baixando);
     if(baixando===true){
         source.close();
-        source = new EventSource('/'+apiKey+'/'+pagina);
+        source = new EventSource('/'+apiKey+'/'+pagina+'/'+endereco+'/'+quartos+'/'+vagas);
     }else{
-        source = new EventSource('/'+apiKey+'/'+pagina);
+        source = new EventSource('/'+apiKey+'/'+pagina+'/'+endereco+'/'+quartos+'/'+vagas);
     }
     var registros = pagina*30;
 
@@ -53,6 +57,8 @@ function search() {
             var indice = dados.indice;
             //Pegando endereço
             var endereco = dados.endereco;
+            //Pegando tipo
+            var tipo = dados.tipo;
             //Pegando preço
             var preco = dados.preco;
             //Pegando área
@@ -72,17 +78,19 @@ function search() {
             indice_celula.innerHTML = indice;
             var endereco_celula = linha.insertCell(1);
             endereco_celula.innerHTML = endereco;
-            var preco_celula = linha.insertCell(2);
+            var tipo_celula = linha.insertCell(2);
+            tipo_celula.innerHTML = tipo;
+            var preco_celula = linha.insertCell(3);
             preco_celula.innerHTML = preco;
-            var area_celula = linha.insertCell(3);
+            var area_celula = linha.insertCell(4);
             area_celula.innerHTML = area;
-            var carro_celula = linha.insertCell(4);
+            var carro_celula = linha.insertCell(5);
             carro_celula.innerHTML = carro;
-            var transporte_celula = linha.insertCell(5);
+            var transporte_celula = linha.insertCell(6);
             transporte_celula.innerHTML = transporte;
-            var link_celula = linha.insertCell(6);
+            var link_celula = linha.insertCell(7);
             link_celula.innerHTML = "<a href='"+link+"'>Link</a>";
-            var email_celula = linha.insertCell(7);
+            var email_celula = linha.insertCell(8);
             email_celula.innerHTML = email;
             //Preenche progress bar
             var pcg = Math.floor(ordem/registros*100);

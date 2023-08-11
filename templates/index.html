@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i&amp;display=swap">
     <link rel="stylesheet" href="assets/fonts/fontawesome-all.min.css">
+    <link rel="stylesheet" href="assets/css/main.css">
 </head>
 
 <body id="page-top">
@@ -27,11 +28,11 @@
                             <div class="carousel-item"><img class="w-100 d-block" src="assets/img/8.png" alt="Slide Image"></div>
                             <div class="carousel-item"><img class="w-100 d-block" src="assets/img/9.png" alt="Slide Image"></div>
                         </div>
-                        <div><a class="carousel-control-prev" href="#carousel-1" role="button" data-bs-slide="prev"><span class="carousel-control-prev-icon"></span><span class="visually-hidden">Previous</span></a><a class="carousel-control-next" href="#carousel-1" role="button" data-bs-slide="next"><span class="carousel-control-next-icon"></span><span class="visually-hidden">Next</span></a></div>
+                        <div><a class="carousel-control-prev" href="#carousel-1" role="button" data-bs-slide="prev"><span class="carousel-control-prev-icon" style="filter: invert(100%);"></span><span class="visually-hidden">Previous</span></a><a class="carousel-control-next" href="#carousel-1" role="button" data-bs-slide="next"><span class="carousel-control-next-icon" style="filter: invert(100%);"></span><span class="visually-hidden">Next</span></a></div>
                         <div class="carousel-indicators"><button type="button" data-bs-target="#carousel-1" data-bs-slide-to="0" class="active"></button> <button type="button" data-bs-target="#carousel-1" data-bs-slide-to="1"></button> <button type="button" data-bs-target="#carousel-1" data-bs-slide-to="2"></button> <button type="button" data-bs-target="#carousel-1" data-bs-slide-to="3"></button> <button type="button" data-bs-target="#carousel-1" data-bs-slide-to="4"></button> <button type="button" data-bs-target="#carousel-1" data-bs-slide-to="5"></button> <button type="button" data-bs-target="#carousel-1" data-bs-slide-to="6"></button> <button type="button" data-bs-target="#carousel-1" data-bs-slide-to="7"></button> <button type="button" data-bs-target="#carousel-1" data-bs-slide-to="8"></button></div>
                     </div>
-                    <p>Siga os passos para conseguir sua chave de API do Google Maps, necessária para consultas na aplicação, guarde essa chave bem e não forneça a ninguém.</p><a href="https://console.cloud.google.com/">Acesse o Google Cloud e crie um projeto</a>
-                    <p>Este é um serviço que requer servidor, para ajudar o desenvolvedor, por favor faça um pix de qualquer valor para a chave arthurpdesimone@gmail.com. Obrigado!</p>
+                    <p>Siga os passos para conseguir sua chave de API do Google Maps, necessária para consultas, guarde essa chave bem.</p><a href="https://console.cloud.google.com/">Acesse o Google Cloud e crie um projeto</a>
+                    <p>Este é um serviço que requer servidor, por favor faça um pix de qualquer valor para a chave arthurpdesimone@gmail.com.&nbsp;</p>
                 </div>
                 <div class="modal-footer"><button class="btn btn-primary" id="prosseguir" type="button">Prosseguir</button></div>
             </div>
@@ -43,9 +44,48 @@
                 <nav class="navbar navbar-expand bg-white shadow mb-4 topbar static-top navbar-light">
                     <div class="container-fluid">
                         <form class="d-none d-sm-inline-block me-auto ms-md-3 my-2 my-md-0 mw-100">
-                            <div>
-                                <div class="input-group"><input class="bg-light form-control border-0 small" type="text" id="api" placeholder="Insira sua chave de API"><button class="btn btn-primary py-0" id="search" type="button" onclick="search()"><i class="fas fa-search" id="search-icon"></i><span class="spinner-border spinner-border-sm" role="status" id="spinner"></span></button><input class="bg-light form-control border-0 small" type="text" id="pagina-final" placeholder="Página final de pesquisa"></div>
-                            </div>
+                            <div class="input-group"><input class="bg-light form-control border-0 small" type="text" id="api" placeholder="Insira sua chave de API"><select class="form-select" id="pagina-final">
+    <optgroup label="Página de pesquisa">
+        <option value="1" selected> Página 1</option>
+        <option value="2"> Página 2</option>
+        <option value="3"> Página 3</option>
+		<option value="4"> Página 4</option>
+		<option value="5"> Página 5</option>
+		<option value="6"> Página 6</option>
+		<option value="7"> Página 7</option>
+		<option value="8"> Página 8</option>
+		<option value="9"> Página 9</option>
+		<option value="10"> Página 10</option>
+		<option value="11"> Página 11</option>
+		<option value="12"> Página 12</option>
+		<option value="13"> Página 13</option>
+		<option value="14"> Página 14</option>
+		<option value="15"> Página 15</option>
+		<option value="16"> Página 16</option>
+		<option value="17"> Página 17</option>
+		<option value="18"> Página 18</option>
+		<option value="19"> Página 19</option>
+		<option value="20"> Página 20</option>
+    </optgroup>
+</select><select class="form-select" id="endereco">
+    <optgroup label="Endereço">
+        <option value="Banco do Brasil - Sede 1" selected> Banco do Brasil - Sede 1</option>
+        <option value="Banco do Brasil - Sede 3"> Banco do Brasil - Sede 3</option>
+        <option value="Banco do Brasil - Sede 4"> Banco do Brasil - Sede 4</option>
+    </optgroup>
+</select><select class="form-select" id = "quartos">
+    <optgroup label="Número de quartos">
+        <option value="1" selected> 1 quarto(s)</option>
+        <option value="2"> 2 quarto(s)</option>
+        <option value="3"> 3 quarto(s)</option>
+    </optgroup>
+</select><select class="form-select" id="vagas">
+    <optgroup label="Número de vagas">
+        <option value="1" selected> 1 vaga(s)</option>
+        <option value="2"> 2 vagas(s)</option>
+        <option value="3"> 3 vagas(s)</option>
+    </optgroup>
+</select><button class="btn btn-primary py-0" id="search" type="button" onclick="search()"><i class="fas fa-search" id="search-icon"></i><span class="spinner-border spinner-border-sm" role="status" id="spinner"></span></button></div>
                         </form>
                         <ul class="navbar-nav flex-nowrap ms-auto">
                             <li class="nav-item dropdown d-sm-none no-arrow"><a class="dropdown-toggle nav-link" aria-expanded="false" data-bs-toggle="dropdown" href="#"><i class="fas fa-search"></i></a>
@@ -78,6 +118,7 @@
                                         <tr>
                                             <th>Índice</th>
                                             <th>Endereço</th>
+                                            <th>Tipo</th>
                                             <th>Preço (R$)</th>
                                             <th>Área (m²)</th>
                                             <th>Carro (min)</th>
@@ -91,6 +132,7 @@
                                         <tr>
                                             <td><strong>Índice</strong></td>
                                             <td><strong>Endereço</strong></td>
+                                            <td><strong>Tipo</strong></td>
                                             <td><strong>Preço (R$)</strong></td>
                                             <td><strong>Área (m²)</strong></td>
                                             <td><strong>Carro (min)</strong></td>

@@ -4,6 +4,7 @@
 '''
 import json
 import sys
+import traceback
 from datetime import datetime
 import googlemaps as googlemaps
 import requests
@@ -16,17 +17,22 @@ app = Flask(__name__, static_folder='templates/assets')
 def index():
     return render_template('index.html')
 
-@app.route('/<api>/<pagina>',methods=['GET'])
-def download_imoveis(api,pagina):
-    def gerar_resposta(api,pagina):
+@app.route('/<api>/<pagina>/<endereco>/<quartos>/<vagas>',methods=['GET'])
+def download_imoveis(api,pagina,endereco,quartos,vagas):
+    def gerar_resposta(api,pagina,endereco,quartos,vagas):
+        print(pagina)
+        print(endereco)
+        print(quartos)
+        print(vagas)
         ordem = 1
         for p in range(1,int(pagina)+1):
-            endereco_a_comparar = 'Banco do Brasil Sede III - Brasilia'
+            endereco_a_comparar = str(endereco)+'- Brasilia'
             gmaps = googlemaps.Client(key=api)
             # Fonte DF Imóveis
-            link = f'https://www.dfimoveis.com.br/aluguel/df/todos/imoveis/1,2-quartos?vagasdegaragem=1&ordenamento=menor-valor&pagina={p}'
+            link = f'https://www.dfimoveis.com.br/aluguel/df/todos/imoveis?quartosinicial=1&quartosfinal={quartos}&vagasdegarageminicial=0&vagasdegaragemfinal={vagas}&ordenamento=menor-valor&pagina={p}'
+            #link = f'https://www.dfimoveis.com.br/aluguel/df/todos/imoveis/1,2-quartos?vagasdegaragem=0&ordenamento=menor-valor&pagina={p}'
             requisicao = requests.get(link)
-
+            print(link)
             soup = BeautifulSoup(requisicao.text, "html.parser")
             imoveis = soup.find_all('a', class_='new-card')
             # Loop pelos imóveis
@@ -43,6 +49,7 @@ def download_imoveis(api,pagina):
                     endereco = imovel_soup.find('h1', class_='mb-0 font-weight-600 fs-1-5')
                     preco = imovel_soup.find('small', class_='display-5 text-warning precoAntigoSalao')
                     area = imovel_soup.find('small', class_='display-5 text-warning')
+                    tipo = imovel_soup.findAll('h6',class_='text-normal mb-0')[2].text.replace('Aluguel de ','').strip()
                     area = round(float(area.text.replace(' ', '').replace('m²', '').replace(',', '.')))
                     cidade = imovel_soup.find_all('h6', class_='mb-0 text-normal text-nowrap')[1].find('small',
                                                                                                        class_='text-muted').text
@@ -89,17 +96,17 @@ def download_imoveis(api,pagina):
                     # Resultados da API do GMaps
                     duracao_transp_pub = transp_pub_direcoes[0]['legs'][0]['duration']['text']
                     duracao_carro = carro_direcoes[0]['legs'][0]['duration']['text']
-
+                    print(duracao_transp_pub)
                     # Tratamento dos resultados
-                    duracao_transp_pub = duracao_transp_pub.replace('hour', ',').replace('mins', '').replace('min',
-                                                                                                             '').replace(
-                        ' ', '')
-                    duracao_carro = duracao_carro.replace('hour', ',').replace('mins', '').replace('min', '').replace(' ',
-                                                                                                                      '')
+                    duracao_transp_pub = duracao_transp_pub.replace('hours',',').replace('hour', ',').replace('mins', '').replace('min','').replace(' ', '')
+
+                    duracao_carro = duracao_carro.replace('hours',',').replace('hour', ',').replace('mins', '').replace('min', '').replace(' ','')
+
                     array_carro = duracao_carro.split(',')
                     array_transp_pub = duracao_transp_pub.split(',')
 
                     # Se tem minutos, o array é divido em dois valores, um com os minutos e outro com as horas
+
                     if len(array_carro) > 1:
                         duracao_carro = int(array_carro[0]) * 60 + int(array_carro[1])
                     else:
@@ -121,6 +128,7 @@ def download_imoveis(api,pagina):
                     imovel_dict = {'ordem': ordem,
                                    'indice': indice,
                                    'endereco': endereco.text + cidade,
+                                   'tipo':tipo,
                                    'preco': preco,
                                    'area': area,
                                    'duracao_carro': duracao_carro,
@@ -129,11 +137,10 @@ def download_imoveis(api,pagina):
                                    'email': email_anunciante}
                     yield "data:"+str(json.dumps(imovel_dict))+"\n\n"
                 except Exception as e:
-                    #traceback.print_exc()
-                    print(e, file=sys.stderr)
+                    traceback.print_exc()
                 ordem+=1
         yield "data:close\n\n"
-    response = Response(stream_with_context(gerar_resposta(api, pagina)), mimetype='text/event-stream')
+    response = Response(stream_with_context(gerar_resposta(api,pagina,endereco,quartos,vagas)), mimetype='text/event-stream')
     response.headers['X-Accel-Buffering'] = 'no'
     return response
 if __name__ == "__main__":
