@@ -7,6 +7,7 @@
     <title>Table - Brand</title>
     <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i&amp;display=swap">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,700">
     <link rel="stylesheet" href="assets/fonts/fontawesome-all.min.css">
     <link rel="stylesheet" href="assets/css/main.css">
 </head>
@@ -81,7 +82,8 @@
     </optgroup>
 </select><select class="form-select" id="vagas">
     <optgroup label="Número de vagas">
-        <option value="1" selected> 1 vaga(s)</option>
+		<option value="0" selected> 0 vaga(s)</option>
+        <option value="1"> 1 vaga(s)</option>
         <option value="2"> 2 vagas(s)</option>
         <option value="3"> 3 vagas(s)</option>
     </optgroup>
@@ -101,9 +103,6 @@
                     </div>
                 </nav>
                 <div class="container-fluid">
-                    <hgroup>
-                        <h3 class="text-dark mb-4">Resultados</h3>
-                    </hgroup>
                     <div class="card shadow">
                         <div class="card-header py-3">
                             <div class="progress">
@@ -111,38 +110,28 @@
                             </div>
                             <p class="text-primary m-0 fw-bold">Imóveis para alugar em Brasília - DF</p>
                         </div>
-                        <div class="card-body">
-                            <div class="table-responsive table mt-2" id="dataTable" role="grid" aria-describedby="dataTable_info">
-                                <table class="table my-0 sticky-top" id="dataTable">
-                                    <thead class="thead">
+                        <div class="card-body" id="table-container">
+                            <div class="table-responsive" id="dataTable">
+                                <table class="table">
+                                    <thead>
                                         <tr>
                                             <th>Índice</th>
                                             <th>Endereço</th>
                                             <th>Tipo</th>
-                                            <th>Preço (R$)</th>
-                                            <th>Área (m²)</th>
-                                            <th>Carro (min)</th>
-                                            <th>Transporte Público (min)</th>
+                                            <th>Preço(R$)</th>
+                                            <th>Área(m²)</th>
+                                            <th>Carro(min)</th>
+                                            <th>Transporte público(min)</th>
                                             <th>Link</th>
                                             <th>E-mail</th>
                                         </tr>
                                     </thead>
-                                    <tbody id="table-body"></tbody>
-                                    <tfoot>
-                                        <tr>
-                                            <td><strong>Índice</strong></td>
-                                            <td><strong>Endereço</strong></td>
-                                            <td><strong>Tipo</strong></td>
-                                            <td><strong>Preço (R$)</strong></td>
-                                            <td><strong>Área (m²)</strong></td>
-                                            <td><strong>Carro (min)</strong></td>
-                                            <td><strong>Transporte Público (min)</strong></td>
-                                            <td><strong>Link</strong></td>
-                                            <td><strong>E-mail</strong></td>
-                                        </tr>
-                                    </tfoot>
+                                    <tbody id="table-body">
+                                        <tr></tr>
+                                    </tbody>
                                 </table>
                             </div>
+                            <div id="bottom-anchor"></div>
                         </div>
                     </div>
                 </div>
@@ -154,9 +143,11 @@
             </footer>
         </div><a class="border rounded d-inline scroll-to-top" href="#page-top"><i class="fas fa-angle-up"></i></a>
     </div>
+    <script src="assets/js/jquery.min.js"></script>
     <script src="assets/bootstrap/js/bootstrap.min.js"></script>
     <script src="assets/js/theme.js"></script>
     <script src="assets/js/main.js"></script>
+    <script src="assets/js/jquery.stickytableheaders.js"></script>
 </body>
 
 </html>

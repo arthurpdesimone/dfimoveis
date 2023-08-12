@@ -146,3 +146,8 @@ window.onload = function () {
     document.querySelector(".modal").classList.add("show");
     document.querySelector(".modal").style.display = "block";
 };
+
+$(document).ready(function () {
+    console.log("Documento carregado");
+    $("#dataTable").stickyTableHeaders();
+  });
