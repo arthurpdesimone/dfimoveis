@@ -29,7 +29,7 @@ def download_imoveis(api,pagina,endereco,quartos,vagas):
             endereco_a_comparar = str(endereco)+'- Brasilia'
             gmaps = googlemaps.Client(key=api)
             # Fonte DF Imóveis
-            link = f'https://www.dfimoveis.com.br/aluguel/df/todos/imoveis?quartosinicial=1&quartosfinal={quartos}&vagasdegarageminicial=0&vagasdegaragemfinal={vagas}&ordenamento=menor-valor&pagina={p}'
+            link = f'https://www.dfimoveis.com.br/aluguel/df/todos/imoveis?quartosinicial={quartos}&quartosfinal={quartos}&vagasdegarageminicial={vagas}&vagasdegaragemfinal={vagas}&ordenamento=menor-valor&pagina={p}'
             #link = f'https://www.dfimoveis.com.br/aluguel/df/todos/imoveis/1,2-quartos?vagasdegaragem=0&ordenamento=menor-valor&pagina={p}'
             requisicao = requests.get(link)
             print(link)
@@ -76,7 +76,7 @@ def download_imoveis(api,pagina,endereco,quartos,vagas):
                     except Exception as e:
                         condominio = 0
 
-                    preco = int(preco.text.replace('.', '')) + int(condominio)
+                    preco = int(preco.text.replace('.', '')) + int(condominio.text.replace('.',''))
                     now = datetime.now()
 
                     # Direções

@@ -148,6 +148,6 @@ window.onload = function () {
 };
 
 $(document).ready(function () {
-    console.log("Documento carregado");
+    $(".tablesorter").tablesorter();
     $("#dataTable").stickyTableHeaders();
   });
