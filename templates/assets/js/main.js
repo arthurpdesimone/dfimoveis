@@ -71,6 +71,8 @@ function search() {
             var link = dados.link;
             //Pegando e-mail
             var email = dados.email;
+            //Pegando whatsapp
+            var whatsapp = dados.whatsapp;
             //Populando a tabela
             var tabela = document.getElementById("dataTable").getElementsByTagName('tbody')[0];
             var linha = tabela.insertRow();
@@ -89,9 +91,16 @@ function search() {
             var transporte_celula = linha.insertCell(6);
             transporte_celula.innerHTML = transporte;
             var link_celula = linha.insertCell(7);
-            link_celula.innerHTML = "<a href='"+link+"'>Link</a>";
+            link_celula.innerHTML = "<a href='"+link+"' target='blank'><i class='fa fa-link' style='font-size:24px;color:green'></i></a>";
             var email_celula = linha.insertCell(8);
             email_celula.innerHTML = email;
+            var whatsapp_celula = linha.insertCell(9);
+            if(whatsapp.includes("whatsapp")){
+                whatsapp_celula.innerHTML = "<a href='"+whatsapp+"'><i class='fa fa-whatsapp' style='font-size:24px;color:green'></i></a>";
+            }else{
+                whatsapp_celula.innerHTML = whatsapp;
+            }
+            
             //Preenche progress bar
             var pcg = Math.floor(ordem/registros*100);
             console.log(pcg);
@@ -151,3 +160,9 @@ $(document).ready(function () {
     $(".tablesorter").tablesorter();
     $("#dataTable").stickyTableHeaders();
   });
+
+  var width = $(window).width();
+  var height = $(window).height();
+  if (width < 1366 || height < 768) {
+      alert("Você necessita de um dispositivo com resolução melhor");
+  }
