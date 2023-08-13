@@ -141,7 +141,6 @@ def download_imoveis(api,pagina,endereco_a_comparar,quartos,vagas):
                     print("Fechando stream", file=sys.stderr)
                     print(e, file=sys.stderr)
                     traceback.print_exc()
-                    yield "data:close\n\n"
                 ordem+=1
         yield "data:close\n\n"
     response = Response(stream_with_context(gerar_resposta(api,pagina,endereco_a_comparar,quartos,vagas)), mimetype='text/event-stream')
