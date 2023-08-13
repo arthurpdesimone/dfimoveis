@@ -29,6 +29,7 @@ def download_imoveis(api,pagina,endereco_a_comparar,quartos,vagas):
         for p in range(1,int(pagina)+1):
             endereco_a_comparar = str(endereco_a_comparar)+'- Brasilia'
             gmaps = googlemaps.Client(key=api)
+            print(f"API KEY {api}", file=sys.stderr)
             # Fonte DF Imóveis
             link = f'https://www.dfimoveis.com.br/aluguel/df/todos/imoveis?quartosinicial={quartos}&quartosfinal={quartos}&vagasdegarageminicial={vagas}&vagasdegaragemfinal={vagas}&ordenamento=menor-valor&pagina={p}'
             requisicao = requests.get(link)
@@ -137,7 +138,10 @@ def download_imoveis(api,pagina,endereco_a_comparar,quartos,vagas):
                                    'whatsapp':link_whatsapp}
                     yield "data:"+str(json.dumps(imovel_dict))+"\n\n"
                 except Exception as e:
+                    print("Fechando stream", file=sys.stderr)
+                    print(e, file=sys.stderr)
                     traceback.print_exc()
+                    yield "data:close\n\n"
                 ordem+=1
         yield "data:close\n\n"
     response = Response(stream_with_context(gerar_resposta(api,pagina,endereco_a_comparar,quartos,vagas)), mimetype='text/event-stream')
