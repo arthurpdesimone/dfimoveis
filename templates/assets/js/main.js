@@ -57,6 +57,8 @@ function search() {
             var indice = dados.indice;
             //Pegando endereço
             var endereco = dados.endereco;
+            //Pegando cidade
+            var cidade = dados.cidade;
             //Pegando tipo
             var tipo = dados.tipo;
             //Pegando preço
@@ -80,23 +82,25 @@ function search() {
             indice_celula.innerHTML = indice;
             var endereco_celula = linha.insertCell(1);
             endereco_celula.innerHTML = endereco;
-            var tipo_celula = linha.insertCell(2);
+            var cidade_celula = linha.insertCell(2);
+            cidade_celula.innerHTML = cidade;
+            var tipo_celula = linha.insertCell(3);
             tipo_celula.innerHTML = tipo;
-            var preco_celula = linha.insertCell(3);
+            var preco_celula = linha.insertCell(4);
             preco_celula.innerHTML = preco;
-            var area_celula = linha.insertCell(4);
+            var area_celula = linha.insertCell(5);
             area_celula.innerHTML = area;
-            var carro_celula = linha.insertCell(5);
+            var carro_celula = linha.insertCell(6);
             carro_celula.innerHTML = carro;
-            var transporte_celula = linha.insertCell(6);
+            var transporte_celula = linha.insertCell(7);
             transporte_celula.innerHTML = transporte;
-            var link_celula = linha.insertCell(7);
+            var link_celula = linha.insertCell(8);
             link_celula.innerHTML = "<a href='"+link+"' target='blank'><i class='fa fa-link' style='font-size:24px;color:green'></i></a>";
-            var email_celula = linha.insertCell(8);
+            var email_celula = linha.insertCell(9);
             email_celula.innerHTML = email;
-            var whatsapp_celula = linha.insertCell(9);
+            var whatsapp_celula = linha.insertCell(10);
             if(whatsapp.includes("whatsapp")){
-                whatsapp_celula.innerHTML = "<a href='"+whatsapp+"'><i class='fa fa-whatsapp' style='font-size:24px;color:green'></i></a>";
+                whatsapp_celula.innerHTML = "<a href='"+whatsapp+"' target='blank'><i class='fa fa-whatsapp' style='font-size:24px;color:green'></i></a>";
             }else{
                 whatsapp_celula.innerHTML = whatsapp;
             }
@@ -163,6 +167,6 @@ $(document).ready(function () {
 
   var width = $(window).width();
   var height = $(window).height();
-  if (width < 1366 || height < 768) {
+  if (width < 1000 || height < 500) {
       alert("Você necessita de um dispositivo com resolução melhor");
   }

@@ -127,7 +127,8 @@ def download_imoveis(api,pagina,endereco_a_comparar,quartos,vagas):
                     # Salva o dicionario
                     imovel_dict = {'ordem': ordem,
                                    'indice': indice,
-                                   'endereco': endereco.text + cidade,
+                                   'endereco': endereco.text,
+                                   'cidade': cidade,
                                    'tipo':tipo,
                                    'preco': 'R$ '+str(preco),
                                    'area': str(area)+' m²',
