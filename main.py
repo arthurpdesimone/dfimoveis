@@ -135,8 +135,7 @@ def download_imoveis(api,pagina,endereco_a_comparar,quartos,vagas):
                                    'duracao_transp_pub': str(duracao_transp_pub) +' min',
                                    'link': link_request,
                                    'email': email_anunciante,
-                                   'whatsapp':link_whatsapp,
-                                   'datetime':datetime.now()}
+                                   'whatsapp':link_whatsapp}
                     yield "data:"+str(json.dumps(imovel_dict))+"\n\n"
                 except Exception as e:
                     print("Fechando stream", file=sys.stderr)
