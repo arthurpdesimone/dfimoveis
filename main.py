@@ -118,7 +118,10 @@ def download_imoveis(api,pagina,endereco_a_comparar,quartos,vagas):
                         duracao_transp_pub = int(array_transp_pub[0])
 
                     # Calcula o índice
-                    indice = round(preco * ((duracao_transp_pub + duracao_carro) ** 2) / area)
+                    if area > 0:
+                        indice = round(preco * ((duracao_transp_pub + duracao_carro) ** 2) / area)
+                    else:
+                        indice = 0
 
                     # Imprime o resultado
                     print(
